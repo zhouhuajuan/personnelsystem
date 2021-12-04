@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.personnelsystem.event.mapper.EducationMapper">
+<!--  <resultMap id="BaseResultMap" type="com.personnelsystem.event.entity.Education">-->
+<!--    <id column="id" jdbcType="INTEGER" property="id" />-->
+<!--    <result column="edu_name" jdbcType="VARCHAR" property="eduName" />-->
+<!--  </resultMap>-->
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
+<!--    delete from education-->
+<!--    where id = #{id,jdbcType=INTEGER}-->
+<!--  </delete>-->
+<!--  <insert id="insert" parameterType="com.personnelsystem.event.entity.Education">-->
+<!--    insert into education (id, edu_name)-->
+<!--    values (#{id,jdbcType=INTEGER}, #{eduName,jdbcType=VARCHAR})-->
+<!--  </insert>-->
+<!--  <update id="updateByPrimaryKey" parameterType="com.personnelsystem.event.entity.Education">-->
+<!--    update education-->
+<!--    set edu_name = #{eduName,jdbcType=VARCHAR}-->
+<!--    where id = #{id,jdbcType=INTEGER}-->
+<!--  </update>-->
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+<!--    select id, edu_name-->
+<!--    from education-->
+<!--    where id = #{id,jdbcType=INTEGER}-->
+<!--  </select>-->
+<!--  <select id="selectAll" resultMap="BaseResultMap">-->
+<!--    select id, edu_name-->
+<!--    from education-->
+<!--  </select>-->
+</mapper>

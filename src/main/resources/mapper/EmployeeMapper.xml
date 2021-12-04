@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.personnelsystem.event.mapper.EmployeeMapper">
+<!--  <resultMap id="BaseResultMap" type="com.personnelsystem.event.entity.Employee">-->
+<!--    <id column="id" jdbcType="INTEGER" property="id" />-->
+<!--    <result column="name" jdbcType="VARCHAR" property="name" />-->
+<!--    <result column="sex" jdbcType="TINYINT" property="sex" />-->
+<!--    <result column="birthday" jdbcType="TIMESTAMP" property="birthday" />-->
+<!--    <result column="education" jdbcType="INTEGER" property="education" />-->
+<!--    <result column="dept_id" jdbcType="INTEGER" property="deptId" />-->
+<!--    <result column="photo" jdbcType="VARCHAR" property="photo" />-->
+<!--    <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber" />-->
+<!--    <result column="address" jdbcType="VARCHAR" property="address" />-->
+<!--    <result column="id_card" jdbcType="VARCHAR" property="idCard" />-->
+<!--  </resultMap>-->
+<!--  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">-->
+<!--    delete from employee-->
+<!--    where id = #{id,jdbcType=INTEGER}-->
+<!--  </delete>-->
+<!--  <insert id="insert" parameterType="com.personnelsystem.event.entity.Employee">-->
+<!--    insert into employee (id, name, sex, -->
+<!--      birthday, education, dept_id, -->
+<!--      photo, phone_number, address, -->
+<!--      id_card)-->
+<!--    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{sex,jdbcType=TINYINT}, -->
+<!--      #{birthday,jdbcType=TIMESTAMP}, #{education,jdbcType=INTEGER}, #{deptId,jdbcType=INTEGER}, -->
+<!--      #{photo,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, -->
+<!--      #{idCard,jdbcType=VARCHAR})-->
+<!--  </insert>-->
+<!--  <update id="updateByPrimaryKey" parameterType="com.personnelsystem.event.entity.Employee">-->
+<!--    update employee-->
+<!--    set name = #{name,jdbcType=VARCHAR},-->
+<!--      sex = #{sex,jdbcType=TINYINT},-->
+<!--      birthday = #{birthday,jdbcType=TIMESTAMP},-->
+<!--      education = #{education,jdbcType=INTEGER},-->
+<!--      dept_id = #{deptId,jdbcType=INTEGER},-->
+<!--      photo = #{photo,jdbcType=VARCHAR},-->
+<!--      phone_number = #{phoneNumber,jdbcType=VARCHAR},-->
+<!--      address = #{address,jdbcType=VARCHAR},-->
+<!--      id_card = #{idCard,jdbcType=VARCHAR}-->
+<!--    where id = #{id,jdbcType=INTEGER}-->
+<!--  </update>-->
+<!--  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">-->
+<!--    select id, name, sex, birthday, education, dept_id, photo, phone_number, address, -->
+<!--    id_card-->
+<!--    from employee-->
+<!--    where id = #{id,jdbcType=INTEGER}-->
+<!--  </select>-->
+<!--  <select id="selectAll" resultMap="BaseResultMap">-->
+<!--    select id, name, sex, birthday, education, dept_id, photo, phone_number, address, -->
+<!--    id_card-->
+<!--    from employee-->
+<!--  </select>-->
+</mapper>
