@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>员工修改</title>
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.6/examples/dashboard/">
+    
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+
+    
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/dashboard.css}" rel="stylesheet">
+  </head>
+  <body>
+    <!--顶部栏-->
+    <div th:replace="~{common/commons::topbar}"></div>
+
+<div class="container-fluid">
+  <div class="row">
+    <!--侧边栏-->
+    <div th:replace="~{common/commons::siderbar(active='list.html')}"></div>
+
+    <!--主内容-->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+      <form th:action="@{/updateEmp}" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:value="${emp.getId()}">
+        <div class="form-group">
+          <label>姓名</label>
+          <input type="text" name="name" class="form-control" th:value="${emp.getName()}">
+        </div>
+        <div class="form-group">
+          <label>性别</label>
+          <div class="form-check form-check-inline">
+            <input th:checked="${emp.getSex()==1}" class="form-check-input" type="radio" name="sex" value="1">
+            <label class="form-check-label">男</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input th:checked="${emp.getSex()==0}" class="form-check-input" type="radio" name="sex" value="0">
+            <label class="form-check-label">女</label>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>生日</label>
+          <input th:value="${#dates.format(emp.getBirthday(),'yyyy-MM-dd')}" type="text" name="birthday" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>学历</label>
+          <select class="form-control" name="education">
+            <option th:selected="${edu.getId()==emp.getEducation()}" th:each="edu:${educations}" th:text="${edu.getEduName()}" th:value="${edu.getId()}"></option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>部门</label>
+          <select class="form-control" name="deptId">
+            <option th:selected="${dept.getId()==emp.getDeptId()}" th:each="dept:${departments}" th:text="${dept.getDeptName()}" th:value="${dept.getId()}"></option>
+          </select>
+        </div>
+<!--        <div class="form-group">-->
+<!--          <label>头像</label>-->
+<!--          <input type="file" name="file" class="form-control">-->
+<!--        </div>-->
+        <div class="form-group">
+          <label>电话</label>
+          <input type="text" th:value="${emp.getPhoneNumber()}" name="phoneNumber" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>地址</label>
+          <input type="text" th:value="${emp.getAddress()}" name="address" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>身份证</label>
+          <input type="text" th:value="${emp.getIdCard()}" name="idCard" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-primary">修改</button>
+        <p style="color: red" th:text="${session.msgUpt}" th:if="${not #strings.isEmpty(session.msgUpt)}"></p>
+      </form>
+    </main>
+  </div>
+</div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="../assets/js/vendor/jquery.slim.min.js"><\/script>')</script><script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+    <script th:src="@{/js/dashboard.js}"></script>
+  </body>
+</html>
