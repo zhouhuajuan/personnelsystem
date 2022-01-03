@@ -141,6 +141,27 @@ public class EmployeeController {
         return "redirect:/emp";
     }
 
+    //一种方式--单独设立一个传图片的表单，想修改头像就修改，不过最终还是得拿到这个员工的信息，把photo改为新传进来的图片路径
+    //所以还是挺麻烦的，至于为什么不一起修改呢，是因为如果有的人不想修改图片，还是会提交这个表单项
+    //此时file有值的，fileName是空，反正就是会报错
+//    @PostMapping("/upload")
+//    public String upload(@RequestParam(value = "file") MultipartFile file,HttpSession session) throws IOException {
+//        String originalName = file.getOriginalFilename();
+//        System.out.println("------------------------->"+originalName);
+//        String extension = originalName.substring(originalName.lastIndexOf("."));
+//
+//        if (!extension.equals(".png") && !extension.equals(".jpg")){
+//            session.setAttribute("msgUpt","文件格式不对");
+//            return "redirect:/emp/add";
+//        }
+//
+//        String fileName =  originalName+(new Date());
+//        //加密后的图片名
+//        String md5FileName = new Md5Hash(fileName).toHex();
+//        String filePath = uploadPathImg+md5FileName+extension;
+//        FileUtil.writeBytes(file.getBytes(), filePath);
+//    }
+
 //    @PostMapping("/updateEmp")
 //    public String updateEmp(@RequestParam(value = "file") MultipartFile file,Employee employee
 //            ,HttpSession session) throws IOException {

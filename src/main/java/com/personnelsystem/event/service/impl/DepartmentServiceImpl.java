@@ -3,7 +3,9 @@ package com.personnelsystem.event.service.impl;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.personnelsystem.event.entity.Department;
+import com.personnelsystem.event.entity.Employee;
 import com.personnelsystem.event.mapper.DepartmentMapper;
+import com.personnelsystem.event.mapper.EmployeeMapper;
 import com.personnelsystem.event.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Autowired
     private DepartmentMapper departmentMapper;
+
+    @Autowired
+    private EmployeeMapper employeeMapper;
 
     @Override
     public List<Department> getAllDept() {
@@ -50,24 +55,23 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public int modifyDepartment(Department department) {
-//        QueryWrapper<Department> wrapper = new QueryWrapper<>();
-//        wrapper.eq("id",department.getId());
-//        Department department1 = departmentMapper.selectOne(wrapper);
-//        if (ObjectUtil.isEmpty(department1)){
-//            throw new DepartmentNotExistException();
-//        }
         //这里修改只能修改部门的名字
         return departmentMapper.updateById(department);
     }
 
     @Override
     public int deleteDepartment(Integer id) {
-//        QueryWrapper<Department> wrapper = new QueryWrapper<>();
-//        wrapper.eq("id",id);
-//        Department department = departmentMapper.selectOne(wrapper);
-//        if (ObjectUtil.isEmpty(department)){
-//            throw new DepartmentNotExistException();
-//        }
+        //注意这里一个细节，如果这个部门被删除，那么属于这个部门的员工应该将部门设置为空
+        QueryWrapper<Employee> wrapper = new QueryWrapper<>();
+        wrapper.eq("dept_id",id);
+        List<Employee> employees = employeeMapper.selectList(wrapper);
+        if (employees.size() != 0){
+            for (Employee employee : employees) {
+                //dept_id=1：空
+                employee.setDeptId(1);
+                employeeMapper.updateById(employee);
+            }
+        }
         return departmentMapper.deleteById(id);
     }
 }

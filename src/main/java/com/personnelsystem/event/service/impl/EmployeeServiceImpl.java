@@ -56,6 +56,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeMapper.updateById(employee);
     }
 
+    /**
+     * 根据条件查询员工
+     */
     @Override
     public List<GetEmployeesResult> selectEmployee(String condition) {
         QueryWrapper<Employee> wrapper = new QueryWrapper<>();
@@ -67,13 +70,14 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         List<GetEmployeesResult> list = new ArrayList<>();
         for (Employee employee: employees) {
-            QueryWrapper<Department> wrapper1 = new QueryWrapper<>();
-            wrapper1.eq("id",employee.getDeptId());
-            Department department = departmentMapper.selectOne(wrapper1);
-
             GetEmployeesResult result = new GetEmployeesResult();
+            if (employee.getDeptId() != 0){
+                QueryWrapper<Department> wrapper1 = new QueryWrapper<>();
+                wrapper1.eq("id",employee.getDeptId());
+                Department department = departmentMapper.selectOne(wrapper1);
+                result.setDeptName(department.getDeptName());
+            }
             BeanUtils.copyProperties(employee,result);
-            result.setDeptName(department.getDeptName());
             list.add(result);
         }
         return list;
@@ -92,18 +96,22 @@ public class EmployeeServiceImpl implements EmployeeService {
         }
 
         for (Employee employee: employees) {
-            QueryWrapper<Department> wrapper1 = new QueryWrapper<>();
-            wrapper1.eq("id",employee.getDeptId());
-            Department department = departmentMapper.selectOne(wrapper1);
-
             GetEmployeesResult result = new GetEmployeesResult();
+            if (employee.getDeptId() != 0){
+                QueryWrapper<Department> wrapper1 = new QueryWrapper<>();
+                wrapper1.eq("id",employee.getDeptId());
+                Department department = departmentMapper.selectOne(wrapper1);
+                result.setDeptName(department.getDeptName());
+            }
             BeanUtils.copyProperties(employee,result);
-            result.setDeptName(department.getDeptName());
             list.add(result);
         }
         return list;
     }
 
+    /**
+     * 打印员工报表
+     */
     @Override
     public List<AllEmployeeResult> getAllEmployee() {
         QueryWrapper<Employee> wrapper = new QueryWrapper<>();
@@ -117,59 +125,23 @@ public class EmployeeServiceImpl implements EmployeeService {
 //        }
 
         for (Employee employee: employees) {
-            QueryWrapper<Department> wrapper1 = new QueryWrapper<>();
-            wrapper1.eq("id",employee.getDeptId());
-            Department department = departmentMapper.selectOne(wrapper1);
-
-            AllEmployeeResult result = new AllEmployeeResult();
-            result.setDeptName(department.getDeptName());
-            result.setGender(employee.getSex()==0?"女":"男");
-            Integer edu = employee.getEducation();
-            if (edu==1){
-                result.setEdu("小学");
-            }else if (edu==2){
-                result.setEdu("初中");
-            }else if (edu==3){
-                result.setEdu("高中");
-            }else if (edu==4){
-                result.setEdu("专科");
-            }else if (edu==5){
-                result.setEdu("本科");
-            }else if (edu==6){
-                result.setEdu("硕士");
-            }else if (edu==7){
-                result.setEdu("博士");
-            }
-
-            BeanUtils.copyProperties(employee,result);
-            list.add(result);
+            AllEmployeeResult result1 = returnResult(employee);
+            list.add(result1);
         }
         return list;
     }
 
-    @Override
-    public Employee getEmployee(Integer id) {
-        QueryWrapper<Employee> wrapper = new QueryWrapper<>();
-        wrapper.eq("id",id);
-        return employeeMapper.selectOne(wrapper);
-    }
-
-    @Override
-    public AllEmployeeResult getAllEmployee(Integer id) {
-        //flag 0--未删除，员工列表查看 1--已删除，撤销列表查看
-        QueryWrapper<Employee> wrapper = new QueryWrapper<>();
-        wrapper.eq("id",id);
-        Employee employee = employeeMapper.selectOne(wrapper);
-
-        QueryWrapper<Department> wrapper1 = new QueryWrapper<>();
-        wrapper1.eq("id",employee.getDeptId());
-        Department department = departmentMapper.selectOne(wrapper1);
-
+    public AllEmployeeResult returnResult(Employee employee){
         AllEmployeeResult result = new AllEmployeeResult();
-        result.setDeptName(department.getDeptName());
-        result.setGender(employee.getSex()==0?"女":"男");
+        if (employee.getDeptId() != 0){
+            QueryWrapper<Department> wrapper = new QueryWrapper<>();
+            wrapper.eq("id",employee.getDeptId());
+            Department department = departmentMapper.selectOne(wrapper);
+            result.setDeptName(department.getDeptName());
+        }
 
-        Integer edu = employee.getEducation();
+        result.setGender(employee.getSex()==0?"女":"男");
+        Integer edu = employee.getEduId();
         if (edu==1){
             result.setEdu("小学");
         }else if (edu==2){
@@ -185,11 +157,32 @@ public class EmployeeServiceImpl implements EmployeeService {
         }else if (edu==7){
             result.setEdu("博士");
         }
-
         BeanUtils.copyProperties(employee,result);
         return result;
     }
 
+    @Override
+    public Employee getEmployee(Integer id) {
+        QueryWrapper<Employee> wrapper = new QueryWrapper<>();
+        wrapper.eq("id",id);
+        return employeeMapper.selectOne(wrapper);
+    }
+
+    /**
+     * 查看员工信息
+     */
+    @Override
+    public AllEmployeeResult getAllEmployee(Integer id) {
+        QueryWrapper<Employee> wrapper = new QueryWrapper<>();
+        wrapper.eq("id",id);
+        Employee employee = employeeMapper.selectOne(wrapper);
+        AllEmployeeResult result = returnResult(employee);
+        return result;
+    }
+
+    /**
+     * 根据员工id撤回删除
+     */
     @Override
     public int cancelDelete(int id) {
         QueryWrapper<Employee> wrapper = new QueryWrapper<>();

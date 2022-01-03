@@ -18,7 +18,7 @@ public class Employee {
 
     private Date birthday;
 
-    private Integer education;
+    private Integer eduId;
 
     private Integer deptId;
 

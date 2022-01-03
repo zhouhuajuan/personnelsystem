@@ -71,7 +71,7 @@
         <div class="form-group">
           <label>学历</label>
           <!--<input type="email" name="email" class="form-control" placeholder="1234@qq.com">-->
-          <select class="form-control" name="education">
+          <select class="form-control" name="eduId">
             <option th:each="edu:${educations}" th:text="${edu.getEduName()}" th:value="${edu.getId()}"></option>
           </select>
         </div>

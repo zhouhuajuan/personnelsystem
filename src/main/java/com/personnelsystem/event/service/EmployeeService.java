@@ -30,21 +30,35 @@ public interface EmployeeService {
     int modifyEmployee(Employee employee);
 
     /**
-     * 根据条件查询员工信息---不完整--传一个string(条件)，数据，返回一个list
-     * @return Employee
+     * 根据条件查询员工信息---只能模糊查询姓名和地址
+     * @return GetEmployeesResult局部的员工信息
      */
     List<GetEmployeesResult> selectEmployee(String condition);
 
     /**
-     * 获取所有员工信息
-     * @return List<Employee>
+     * 获取所有员工的局部信息--作为list表的展示--因为不展示员工的所有信息
+     * @return List<GetEmployeesResult> 获取局部的员工信息
      */
     List<GetEmployeesResult> getEmployees(Byte flag);
 
+    /**
+     * 获取所有员工的所有信息
+     * @return List<AllEmployeeResult>
+     */
     List<AllEmployeeResult> getAllEmployee();
 
+    /**
+     * 根据id拿到员工全部信息--未转化
+     * @param id id
+     * @return Employee
+     */
     Employee getEmployee(Integer id);
 
+    /**
+     * 根据id拿到员工所有信息--转化为String
+     * @param id id
+     * @return AllEmployeeResult
+     */
     AllEmployeeResult getAllEmployee(Integer id);
 
     /**

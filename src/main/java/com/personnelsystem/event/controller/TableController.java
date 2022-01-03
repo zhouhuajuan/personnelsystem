@@ -1,7 +1,6 @@
 package com.personnelsystem.event.controller;
 
 import com.personnelsystem.event.dto.request.TablesDTO;
-import com.personnelsystem.event.service.DepartmentService;
 import com.personnelsystem.event.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
